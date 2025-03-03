@@ -7,6 +7,8 @@ public interface IProductRepository
     Task AddProduct(Product product);
 
     Task<IEnumerable<Product>> GetProducts();
+    
+    Task<IEnumerable<Product>> GetLatestProducts(int count);
 
     Task<IEnumerable<Product>> GetProductsByCategory(int categoryId);
 

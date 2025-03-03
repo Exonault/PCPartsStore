@@ -17,6 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //Add repository
 builder.Services.AddRepositories();
 
+//Add user auth
+builder.Services.AddUserAuthentication();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,9 +31,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapStaticAssets();
 
@@ -39,5 +46,8 @@ app.MapControllerRoute(
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.MapControllerRoute(
+    name: "account",
+    pattern: "{controller=Account}/{action}");
 
 app.Run();

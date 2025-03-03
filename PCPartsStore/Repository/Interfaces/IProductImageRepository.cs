@@ -7,6 +7,8 @@ public interface IProductImageRepository
     Task AddProductImage(ProductImage productImage);
 
     Task<IEnumerable<ProductImage>> GetProductImages();
+    
+    Task<ProductImage?> GetProductImageById(int productId);
 
     Task UpdateProductImage(ProductImage productImage);
 

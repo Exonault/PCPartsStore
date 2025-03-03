@@ -26,6 +26,11 @@ public class ProductImageRepository : IProductImageRepository
         return await _dbContext.ProductsImages.ToListAsync();
     }
 
+    public async Task<ProductImage?> GetProductImageById(int productId)
+    {
+       return await _dbContext.ProductsImages.FirstOrDefaultAsync(p => p.Id == productId);
+    }
+
     public async Task UpdateProductImage(ProductImage productImage)
     {
         _dbContext.Entry(productImage).State = EntityState.Modified;
