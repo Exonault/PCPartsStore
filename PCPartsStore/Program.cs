@@ -50,4 +50,8 @@ app.MapControllerRoute(
     name: "account",
     pattern: "{controller=Account}/{action}");
 
+app.MapControllerRoute(
+    name: "product",
+    pattern: "{controller=Product}/{action}");
+
 app.Run();

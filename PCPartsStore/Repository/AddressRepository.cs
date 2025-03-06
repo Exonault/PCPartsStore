@@ -30,6 +30,11 @@ public class AddressRepository : IAddressRepository
         return await _dbContext.UserAddress.FirstOrDefaultAsync(x => x.Id == id);
     }
 
+    public async Task<List<Address>> GetAddressesByUserId(string userId)
+    {
+        return await _dbContext.UserAddress.Where(x => x.User.Id == userId).ToListAsync();
+    }
+
     public async Task UpdateAddress(Address address)
     {
         _dbContext.Entry(address).State = EntityState.Modified;

@@ -132,7 +132,7 @@
                                                    asp-action="UserPage">User</a>
                                             </li>
                                             <li class="nav-item">
-                                                <form method="post" asp-action="Logout" asp-controller="Account"
+                                                <form method="post"  asp-controller="Account" asp-action="Logout"
                                                       class="d-flex justify-content-center">
                                                     <button type="submit" class="nav-link text-dark btn btn-link">Sign
                                                         out
@@ -231,11 +231,11 @@
     </main>
 </div>
 
-@* <footer class="border-top footer text-muted"> *@
-@*     <div class="container"> *@
-@*         &copy; 2025 - PCPartsStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
-@*     </div> *@
-@* </footer> *@
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2025 - PC Parts Store - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

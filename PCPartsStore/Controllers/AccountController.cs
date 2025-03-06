@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PCPartsStore.Entities;
 using PCPartsStore.Models.Account;
+using PCPartsStore.Repository.Interfaces;
 
 namespace PCPartsStore.Controllers;
 
@@ -9,15 +12,18 @@ public class AccountController : Controller
     private readonly ILogger<AccountController> _logger;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly IAddressRepository _addressRepository;
 
     public AccountController(ILogger<AccountController> logger, UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager)
+        SignInManager<IdentityUser> signInManager, IAddressRepository addressRepository)
     {
         _logger = logger;
         _userManager = userManager;
         _signInManager = signInManager;
+        _addressRepository = addressRepository;
     }
 
+    [AllowAnonymous]
     public IActionResult Register()
     {
         if (User.Identity.IsAuthenticated)
@@ -66,6 +72,7 @@ public class AccountController : Controller
         return View(model);
     }
 
+    [AllowAnonymous]
     public IActionResult Login()
     {
         if (_userManager.Users.Any() == false) return RedirectToAction("Register");
@@ -103,10 +110,44 @@ public class AccountController : Controller
         return View();
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> Logout()
     {
         Response.Cookies.Delete("SessionData");
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [Route("Account/Admin")]
+    public IActionResult AdminPage()
+    {
+        return View();
+    }
+
+    [Authorize(Roles = "User")]
+    [Route("Account/User")]
+    public IActionResult UserPage()
+    {
+        return View();
+    }
+
+    [Authorize(Roles = "User")]
+    [Route("Account/User/Addresses")]
+    public async Task<IActionResult> Addresses()
+    {
+        var userId = _userManager.GetUserId(User);
+        var addresses = await _addressRepository.GetAddressesByUserId(userId);
+        if (addresses.Any())
+            return RedirectToAction("AddAddress");
+
+        return View(addresses);
+    }
+
+    [Authorize(Roles = "User")]
+    [Route("Account/User/Address/New")]
+    public IActionResult AddAddress()
+    {
+        return View();
     }
 }

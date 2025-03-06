@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "UserPage";
+}
+
+@* <h1>@(ViewData["PageTitle"] ?? ViewData["Title"])</h1> *@
+<h1>User page</h1>
+<div class="row flex-column col-lg-2 col-sm-auto me-5">
+    <hr style="width: 100%" class="ms-2"/>
+    <div class="row flex-column gap-2">
+        <a class="col-lg-5 col-sm-auto text-dark text-decoration-none fs-3" asp-action="Addresses">
+            Addresses
+        </a>
+        <a class="col-lg-5 col-sm-auto text-dark text-decoration-none fs-3" asp-action="Orders">
+            Orders
+        </a>
+    </div>
+</div>

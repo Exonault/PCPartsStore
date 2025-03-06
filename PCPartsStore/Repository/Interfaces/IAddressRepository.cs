@@ -10,6 +10,8 @@ public interface IAddressRepository
     
     Task<Address?> GetAddressById(int id);
     
+    Task<List<Address>> GetAddressesByUserId(string id);
+    
     Task UpdateAddress(Address address);
     
     Task DeleteAddress(Address address);

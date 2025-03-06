@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PCPartsStore.Entities;
 using PCPartsStore.Models;
 using PCPartsStore.Repository.Interfaces;
 
@@ -48,5 +49,18 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public async Task<IActionResult> Search(string searchString, int? page)
+    {
+        // ViewData["actions"] = await _productCategoryRepository.GetProductCategories();
+        IEnumerable<ProductCategory> productCategories = await _productCategoryRepository.GetProductCategories();
+
+        List<string> productCategoriesNames = productCategories.Select(x => x.Name).ToList();
+        
+        ViewData["actions"] = productCategoriesNames;
+        // search
+        
+        return View();
     }
 }
