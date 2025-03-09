@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
@@ -7,7 +8,7 @@ namespace PCPartsStore.Entities;
 
 public class Address
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
 
     [Required]
@@ -27,6 +28,9 @@ public class Address
 
     [Required]
     public string Street { get; set; }
+
+    [ValidateNever]
+    public string UserId { get; set; }
 
     [ValidateNever]
     public IdentityUser User { get; set; }

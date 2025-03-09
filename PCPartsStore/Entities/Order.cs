@@ -20,6 +20,7 @@ public class Order
 
     [Precision(9,2)]
     public decimal? TotalPrice { get; set; }
-    
+
+    public string UserId { get; set; }
     public IdentityUser User { get; set; }
 }

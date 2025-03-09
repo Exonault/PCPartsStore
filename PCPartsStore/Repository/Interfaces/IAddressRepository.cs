@@ -4,15 +4,17 @@ namespace PCPartsStore.Repository.Interfaces;
 
 public interface IAddressRepository
 {
-    Task AddAddress(Address address);
+    void AddAddress(Address address);
     
-    Task<IEnumerable<Address>> GetAddresses();
+    List<Address> GetAddresses();
     
-    Task<Address?> GetAddressById(int id);
+    Address? GetAddressById(int id);
     
-    Task<List<Address>> GetAddressesByUserId(string id);
+   int GetLastAddressId();
     
-    Task UpdateAddress(Address address);
+   List<Address> GetAddressesByUserId(string id);
     
-    Task DeleteAddress(Address address);
+    void UpdateAddress(Address address);
+    
+    void DeleteAddress(Address address);
 }

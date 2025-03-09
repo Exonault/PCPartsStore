@@ -14,36 +14,43 @@ public class AddressRepository : IAddressRepository
         _dbContext = context;
     }
 
-    public async Task AddAddress(Address address)
+    public void AddAddress(Address address)
     {
-        await _dbContext.UserAddress.AddAsync(address);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.UserAddress.Add(address);
+        _dbContext.SaveChanges();
     }
 
-    public async Task<IEnumerable<Address>> GetAddresses()
+    public List<Address> GetAddresses()
     {
-        return await _dbContext.UserAddress.ToListAsync();
+        return _dbContext.UserAddress.ToList();
+    }
+    
+    
+
+    public  Address? GetAddressById(int id)
+    {
+        return  _dbContext.UserAddress.FirstOrDefault(x => x.Id == id);
     }
 
-    public async Task<Address?> GetAddressById(int id)
+    public int GetLastAddressId()
     {
-        return await _dbContext.UserAddress.FirstOrDefaultAsync(x => x.Id == id);
+        return  _dbContext.UserAddress.Max(a => (int?)a.Id) ?? 0;
     }
 
-    public async Task<List<Address>> GetAddressesByUserId(string userId)
+    public List<Address> GetAddressesByUserId(string userId)
     {
-        return await _dbContext.UserAddress.Where(x => x.User.Id == userId).ToListAsync();
+        return _dbContext.UserAddress.Where(x => x.User.Id == userId).ToList();
     }
 
-    public async Task UpdateAddress(Address address)
+    public void UpdateAddress(Address address)
     {
-        _dbContext.Entry(address).State = EntityState.Modified;
-        await _dbContext.SaveChangesAsync();
+        _dbContext.Entry(address).State = EntityState.Modified; 
+        _dbContext.SaveChanges();
     }
 
-    public async Task DeleteAddress(Address address)
+    public void DeleteAddress(Address address)
     {
-        _dbContext.UserAddress.Remove(address);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.UserAddress.Remove(address); 
+        _dbContext.SaveChanges();
     }
 }

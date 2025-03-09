@@ -17,6 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //Add repository
 builder.Services.AddRepositories();
 
+//Add services
+builder.Services.AddServices();
+
 //Add user auth
 builder.Services.AddUserAuthentication();
 

@@ -2,8 +2,22 @@
     ViewData["Title"] = "UserPage";
 }
 
-@* <h1>@(ViewData["PageTitle"] ?? ViewData["Title"])</h1> *@
-<h1>User page</h1>
+@{
+    string? pageTitle = ViewData["Title"] as string ?? "Default title";
+
+    switch (pageTitle)
+    {
+        case "UserPage":
+            pageTitle = "User page";
+            break;
+
+        default:
+            pageTitle = (ViewData["PageTitle"] ?? ViewData["Title"]) as string;
+            break;
+    }
+}
+
+<h1>@pageTitle</h1>
 <div class="row flex-column col-lg-2 col-sm-auto me-5">
     <hr style="width: 100%" class="ms-2"/>
     <div class="row flex-column gap-2">
@@ -15,3 +29,6 @@
         </a>
     </div>
 </div>
+
+
+

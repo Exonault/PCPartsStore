@@ -12,7 +12,7 @@ using PCPartsStore.Data;
 namespace PCPartsStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250302135019_Initial")]
+    [Migration("20250308095717_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -238,10 +238,7 @@ namespace PCPartsStore.Migrations
             modelBuilder.Entity("PCPartsStore.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -265,6 +262,7 @@ namespace PCPartsStore.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -307,6 +305,7 @@ namespace PCPartsStore.Migrations
                         .HasColumnType("numeric(9,2)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -457,7 +456,9 @@ namespace PCPartsStore.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -466,7 +467,9 @@ namespace PCPartsStore.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
