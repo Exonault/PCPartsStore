@@ -15,20 +15,20 @@ public class ProductImageRepository : IProductImageRepository
     }
 
 
-    public async Task AddProductImage(ProductImage productImage)
+    public void AddProductImage(ProductImage productImage)
     {
-        await _dbContext.AddAsync(productImage);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.Add(productImage);
+        _dbContext.SaveChanges();
     }
 
-    public async Task<IEnumerable<ProductImage>> GetProductImages()
+    public List<ProductImage> GetProductImages()
     {
-        return await _dbContext.ProductsImages.ToListAsync();
+        return _dbContext.ProductsImages.ToList();
     }
 
     public ProductImage? GetProductImageById(int? productId)
     {
-       return _dbContext.ProductsImages.FirstOrDefault(p => p.Id == productId);
+        return _dbContext.ProductsImages.FirstOrDefault(p => p.Id == productId);
     }
 
     public ProductImage? GetProductImageByName(string fileName)
@@ -38,7 +38,7 @@ public class ProductImageRepository : IProductImageRepository
 
     public bool ProductImageExists(string fileName)
     {
-     return _dbContext.ProductsImages.Any(p => p.Name == fileName);
+        return _dbContext.ProductsImages.Any(p => p.Name == fileName);
     }
 
     public async Task UpdateProductImage(ProductImage productImage)

@@ -14,38 +14,38 @@ public class OrderRepository : IOrderRepository
         _dbContext = dbContext;
     }
 
-    public async Task AddOrder(Order order)
+    public void AddOrder(Order order)
     {
-        await _dbContext.Orders.AddAsync(order);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.Orders.Add(order);
+        _dbContext.SaveChanges();
     }
 
-    public async Task<IEnumerable<Order>> GetOrders()
+    public List<Order> GetOrders()
     {
-        return await _dbContext.Orders.ToListAsync();
+        return _dbContext.Orders.ToList();
     }
 
-    public async Task<IEnumerable<Order>> GetOrdersByCustomerId(string customerId)
+    public List<Order> GetOrdersByCustomerId(string customerId)
     {
-        return await _dbContext.Orders
+        return _dbContext.Orders
             .Where(o => o.User.Id == customerId)
-            .ToListAsync();
+            .ToList();
     }
 
-    public async Task<Order?> GetOrderId(int id)
+    public Order? GetOrderId(int id)
     {
-        return await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
+        return _dbContext.Orders.FirstOrDefault(x => x.Id == id);
     }
 
-    public async Task UpdateOrder(Order order)
+    public void UpdateOrder(Order order)
     {
         _dbContext.Entry(order).State = EntityState.Modified;
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 
-    public async Task DeleteOrder(Order order)
+    public void DeleteOrder(Order order)
     {
         _dbContext.Orders.Remove(order);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 }

@@ -4,15 +4,15 @@ namespace PCPartsStore.Repository.Interfaces;
 
 public interface IOrderRepository
 {
-    Task AddOrder(Order order);
+    void AddOrder(Order order);
     
-    Task<IEnumerable<Order>> GetOrders();
+    List<Order> GetOrders();
     
-    Task<IEnumerable<Order>> GetOrdersByCustomerId(string customerId);
+    List<Order> GetOrdersByCustomerId(string customerId);
     
-    Task<Order?> GetOrderId(int id);
+    Order? GetOrderId(int id);
     
-    Task UpdateOrder(Order order);
+    void UpdateOrder(Order order);
     
-    Task DeleteOrder(Order order);
+    void DeleteOrder(Order order);
 }

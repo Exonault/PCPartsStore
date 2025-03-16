@@ -1,0 +1,55 @@
+﻿@model PCPartsStore.Entities.Product
+@{
+    ViewData["Title"] = "Product";
+}
+
+@*<h1>Product</h1>
+<h1>ID - @Model.Id</h1>
+<h1>Name - @Model.Name</h1>
+<h1 class="d-flex">Description - <span class="ms-2">@Html.Raw(Model.Description)</span></h1>
+<h1>Price - @Model.Price</h1>
+<h1>ImagePath - @Model.ProductImage.ImagePath</h1>
+<h1>Category Id - @Model.ProductCategoryId</h1>*@
+<div class="row">
+    <div class="col-lg-4 col-sm-auto d-flex flex-column">
+        <span class="fs-1 col-lg-auto col-sm-4">@Model.Name</span>
+        <img src="@Model.ProductImage.ImagePath" class="col-lg-10 col-sm-7" width="300" height="300" style="object-fit: contain"/>
+    </div>
+    <div class="col-lg-4 col-sm-12" style="margin-top: 4.5em !important;">
+        <span class="fs-4 col-lg-auto col-sm-4">Short Description</span>
+        <span>@Html.Raw(Model.Description)</span>
+    </div>
+    <div class="col-lg-4 col-sm-auto d-flex flex-column border rounded p-0" style="margin-top: 4.5em !important;">
+        <div class="col-12 fs-1 text-center pb-3 mb-3 border-bottom">
+            <span>@Model.Price</span>
+        </div>
+        <div class="col-12 fs-1 text-center pb-3 mb-3 pe-2 border-bottom d-flex align-items-center justify-content-center">
+            <i class="bi bi-check-circle-fill me-1 text-success"></i>
+            <span>In stock</span>
+        </div>
+        <div class="ps-2 pe-2 pb-1 d-flex align-items-center flex-grow-1">
+            <form method="post" asp-controller="Cart" asp-action="AddToCart" id="add-to-cart-form" class="w-100">
+                <input type="hidden" name="id" value="@Model.Id"/>
+                <button type="submit" class="btn btn-primary w-100 p-3">Add to cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        $("#add-to-cart-form").submit(function (e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddToCart", "Cart")",
+                data: $(this).serialize(),
+                success: function (res){
+                    window.location.href = res.url;
+                }
+            });
+        })
+    </script>
+}

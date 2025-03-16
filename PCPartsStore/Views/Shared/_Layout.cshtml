@@ -167,7 +167,7 @@
                                             @{
                                                 if (Context.Session.GetComplexData<HashSet<CartViewModel>>("Cart") != null)
                                                 {
-                                                    var productImages = (await ProductImageRepository.GetProductImages()).ToList();
+                                                    var productImages = ( ProductImageRepository.GetProductImages()).ToList();
                                                     @foreach (var entity in Context.Session.GetComplexData<HashSet<CartViewModel>>("Cart"))
                                                     {
                                                         entity.Product.ProductImage = productImages.FirstOrDefault(i => i.Id == entity.Product.ProductImage.Id);

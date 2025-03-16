@@ -6,17 +6,17 @@ public interface IProductRepository
 {
     Task AddProduct(Product product);
 
-    Task<IEnumerable<Product>> GetProducts();
+    List<Product> GetProducts();
     
     bool ContainsProductWithId(int? id);
     
-    Task<IEnumerable<Product>> GetLatestProducts(int count);
+    List<Product> GetLatestProducts(int count);
 
-    Task<IEnumerable<Product>> GetProductsByCategory(int categoryId);
+   List<Product> GetProductsByCategory(int categoryId);
 
-    Task<Product?> GetProductById(int id);
+    Product? GetProductById(int id);
 
-    Task UpdateProduct(Product product);
+    void UpdateProduct(Product product);
 
-    Task DeleteProduct(Product product);
+    void DeleteProduct(Product product);
 }

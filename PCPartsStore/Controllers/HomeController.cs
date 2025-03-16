@@ -26,7 +26,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var latestProducts = (await _productRepository.GetLatestProducts(5)).ToList();
+        var latestProducts = (_productRepository.GetLatestProducts(5)).ToList();
 
         ViewData["actions"] = (_productCategoryRepository.GetProductCategories())
             .Select(pc => pc.Name)

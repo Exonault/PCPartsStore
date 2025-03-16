@@ -20,40 +20,40 @@ public class ProductRepository : IProductRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Product>> GetProducts()
+    public List<Product> GetProducts()
     {
-        return await _dbContext.Products.ToListAsync();
+        return _dbContext.Products.ToList();
     }
 
     public bool ContainsProductWithId(int? id)
     {
-       return _dbContext.Products.Any(p => p.Id == id);
+        return _dbContext.Products.Any(p => p.Id == id);
     }
 
-    public async Task<IEnumerable<Product>> GetLatestProducts(int count)
+    public List<Product> GetLatestProducts(int count)
     {
-        return await _dbContext.Products.OrderByDescending(p => p.Price).Take(count).ToListAsync();
+        return _dbContext.Products.OrderByDescending(p => p.Price).Take(count).ToList();
     }
 
-    public async Task<IEnumerable<Product>> GetProductsByCategory(int categoryId)
+    public List<Product> GetProductsByCategory(int categoryId)
     {
-        return await _dbContext.Products.Where(p => p.ProductCategory.Id == categoryId).ToListAsync();
+        return _dbContext.Products.Where(p => p.ProductCategory.Id == categoryId).ToList();
     }
 
-    public async Task<Product?> GetProductById(int id)
+    public Product? GetProductById(int id)
     {
-        return await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+        return _dbContext.Products.FirstOrDefault(p => p.Id == id);
     }
 
-    public async Task UpdateProduct(Product product)
+    public void UpdateProduct(Product product)
     {
         _dbContext.Entry(product).State = EntityState.Modified;
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 
-    public async Task DeleteProduct(Product product)
+    public void DeleteProduct(Product product)
     {
         _dbContext.Products.Remove(product);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 }

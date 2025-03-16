@@ -4,9 +4,9 @@ namespace PCPartsStore.Repository.Interfaces;
 
 public interface IProductImageRepository
 {
-    Task AddProductImage(ProductImage productImage);
+    void AddProductImage(ProductImage productImage);
 
-    Task<IEnumerable<ProductImage>> GetProductImages();
+    List<ProductImage> GetProductImages();
     
     ProductImage? GetProductImageById(int? productId);
     
