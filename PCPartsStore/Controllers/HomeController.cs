@@ -28,13 +28,13 @@ public class HomeController : Controller
     {
         var latestProducts = (await _productRepository.GetLatestProducts(5)).ToList();
 
-        ViewData["actions"] = (await _productCategoryRepository.GetProductCategories())
+        ViewData["actions"] = (_productCategoryRepository.GetProductCategories())
             .Select(pc => pc.Name)
             .ToList();
 
         foreach (var product in latestProducts)
         {
-            product.ProductImage = await _productImageRepository.GetProductImageById(product.ProductImage.Id);
+            product.ProductImage = _productImageRepository.GetProductImageById(product.ProductImageId);
         }
 
         return View(latestProducts);
@@ -54,7 +54,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Search(string searchString, int? page)
     {
         // ViewData["actions"] = await _productCategoryRepository.GetProductCategories();
-        IEnumerable<ProductCategory> productCategories = await _productCategoryRepository.GetProductCategories();
+        IEnumerable<ProductCategory> productCategories = _productCategoryRepository.GetProductCategories();
 
         List<string> productCategoriesNames = productCategories.Select(x => x.Name).ToList();
         

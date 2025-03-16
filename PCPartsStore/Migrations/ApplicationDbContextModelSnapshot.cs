@@ -335,6 +335,9 @@ namespace PCPartsStore.Migrations
                     b.Property<int>("ProductImageId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductCategoryId");

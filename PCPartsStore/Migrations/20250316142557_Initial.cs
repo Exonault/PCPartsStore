@@ -240,6 +240,7 @@ namespace PCPartsStore.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<decimal>(type: "numeric(6,2)", precision: 6, scale: 2, nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
                     ProductImageId = table.Column<int>(type: "integer", nullable: false),
                     ProductCategoryId = table.Column<int>(type: "integer", nullable: false)
                 },

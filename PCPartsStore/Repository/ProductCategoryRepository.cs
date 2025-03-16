@@ -14,31 +14,31 @@ public class ProductCategoryRepository : IProductCategoryRepository
         _dbContext = dbContext;
     }
 
-    public async Task AddProductCategory(ProductCategory productCategory)
+    public void AddProductCategory(ProductCategory productCategory)
     {
-        await _dbContext.ProductsCategory.AddAsync(productCategory);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.ProductsCategory.Add(productCategory);
+        _dbContext.SaveChanges();
     }
 
-    public async Task<IEnumerable<ProductCategory>> GetProductCategories()
+    public List<ProductCategory> GetProductCategories()
     {
-        return await _dbContext.ProductsCategory.ToListAsync();
+        return _dbContext.ProductsCategory.ToList();
     }
 
-    public async Task<ProductCategory?> GetProductCategoryById(int id)
+    public ProductCategory? GetProductCategoryById(int id)
     {
-        return await _dbContext.ProductsCategory.FirstOrDefaultAsync(c => c.Id == id);
+        return _dbContext.ProductsCategory.FirstOrDefault(c => c.Id == id);
     }
 
-    public async Task UpdateProductCategory(ProductCategory productCategory)
+    public void UpdateProductCategory(ProductCategory productCategory)
     {
         _dbContext.Entry(productCategory).State = EntityState.Modified;
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 
-    public async Task DeleteProductCategory(ProductCategory productCategory)
+    public void DeleteProductCategory(ProductCategory productCategory)
     {
         _dbContext.ProductsCategory.Remove(productCategory);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.SaveChanges();
     }
 }

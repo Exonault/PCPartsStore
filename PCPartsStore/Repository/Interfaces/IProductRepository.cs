@@ -8,6 +8,8 @@ public interface IProductRepository
 
     Task<IEnumerable<Product>> GetProducts();
     
+    bool ContainsProductWithId(int? id);
+    
     Task<IEnumerable<Product>> GetLatestProducts(int count);
 
     Task<IEnumerable<Product>> GetProductsByCategory(int categoryId);

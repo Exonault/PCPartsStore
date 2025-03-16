@@ -26,6 +26,10 @@ public class Product
     [Range(1D, 100000D, ErrorMessage = "Price should be in the range 1 - 100.000")]
     public decimal? Price { get; set; }
 
+    [Required]
+    [Range(0, int.MaxValue, ErrorMessage = "Quantity should be positive")]
+    public int Quantity { get; set; }
+
     [NotMapped]
     [Required(ErrorMessage = "Please select an image for the product")]
     [DataType(DataType.Upload)]

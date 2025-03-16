@@ -25,6 +25,11 @@ public class ProductRepository : IProductRepository
         return await _dbContext.Products.ToListAsync();
     }
 
+    public bool ContainsProductWithId(int? id)
+    {
+       return _dbContext.Products.Any(p => p.Id == id);
+    }
+
     public async Task<IEnumerable<Product>> GetLatestProducts(int count)
     {
         return await _dbContext.Products.OrderByDescending(p => p.Price).Take(count).ToListAsync();

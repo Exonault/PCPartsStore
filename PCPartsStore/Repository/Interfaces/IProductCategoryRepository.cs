@@ -4,13 +4,13 @@ namespace PCPartsStore.Repository.Interfaces;
 
 public interface IProductCategoryRepository
 {
-    Task AddProductCategory(ProductCategory productCategory);
+    void AddProductCategory(ProductCategory productCategory);
 
-    Task<IEnumerable<ProductCategory>> GetProductCategories();
+    List<ProductCategory> GetProductCategories();
 
-    Task<ProductCategory?> GetProductCategoryById(int id);
+    ProductCategory? GetProductCategoryById(int id);
 
-    Task UpdateProductCategory(ProductCategory productCategory);
+    void UpdateProductCategory(ProductCategory productCategory);
 
-    Task DeleteProductCategory(ProductCategory productCategory);
+    void DeleteProductCategory(ProductCategory productCategory);
 }

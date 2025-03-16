@@ -68,7 +68,7 @@
                                         Products
                                     </a>
                                     <ul class="dropdown-menu sub-menu text-center">
-                                        @foreach (var productCategory in await ProductCategoryRepository.GetProductCategories())
+                                        @foreach (var productCategory in ProductCategoryRepository.GetProductCategories())
                                         {
                                             <li>
                                                 @* <a class="nav-link text-dark" asp-action="@productCategory.Name" asp-controller="Product">Cpus</a> *@

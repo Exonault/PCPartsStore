@@ -8,7 +8,11 @@ public interface IProductImageRepository
 
     Task<IEnumerable<ProductImage>> GetProductImages();
     
-    Task<ProductImage?> GetProductImageById(int productId);
+    ProductImage? GetProductImageById(int? productId);
+    
+    ProductImage? GetProductImageByName(string fileName);
+    
+    bool ProductImageExists(string fileName);
 
     Task UpdateProductImage(ProductImage productImage);
 

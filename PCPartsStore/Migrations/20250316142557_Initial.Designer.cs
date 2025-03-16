@@ -12,7 +12,7 @@ using PCPartsStore.Data;
 namespace PCPartsStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250308095717_Initial")]
+    [Migration("20250316142557_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -336,6 +336,9 @@ namespace PCPartsStore.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("ProductImageId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");

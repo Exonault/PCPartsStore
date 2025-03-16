@@ -26,9 +26,19 @@ public class ProductImageRepository : IProductImageRepository
         return await _dbContext.ProductsImages.ToListAsync();
     }
 
-    public async Task<ProductImage?> GetProductImageById(int productId)
+    public ProductImage? GetProductImageById(int? productId)
     {
-       return await _dbContext.ProductsImages.FirstOrDefaultAsync(p => p.Id == productId);
+       return _dbContext.ProductsImages.FirstOrDefault(p => p.Id == productId);
+    }
+
+    public ProductImage? GetProductImageByName(string fileName)
+    {
+        return _dbContext.ProductsImages.FirstOrDefault(p => p.Name == fileName);
+    }
+
+    public bool ProductImageExists(string fileName)
+    {
+     return _dbContext.ProductsImages.Any(p => p.Name == fileName);
     }
 
     public async Task UpdateProductImage(ProductImage productImage)
