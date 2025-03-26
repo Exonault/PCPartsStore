@@ -14,17 +14,19 @@ public class AccountController : Controller
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly IAddressRepository _addressRepository;
+    private readonly IOrderHistoryService _orderHistoryService;
 
     private readonly IUserService _userService;
 
     public AccountController(ILogger<AccountController> logger, UserManager<IdentityUser> userManager,
-        SignInManager<IdentityUser> signInManager, IAddressRepository addressRepository, IUserService userService)
+        SignInManager<IdentityUser> signInManager, IAddressRepository addressRepository, IUserService userService, IOrderHistoryService orderHistoryService)
     {
         _logger = logger;
         _userManager = userManager;
         _signInManager = signInManager;
         _addressRepository = addressRepository;
         _userService = userService;
+        _orderHistoryService = orderHistoryService;
     }
 
     [AllowAnonymous]
@@ -224,11 +226,17 @@ public class AccountController : Controller
     [Route("Account/User/Orders")]
     public IActionResult Orders(int? page)
     {
-        return View();
+        var paginatedList = _orderHistoryService.OrderPage(page);
+        if (page > paginatedList.TotalPages) return NotFound();
+
+        return View(paginatedList);
     }
 
+    [Authorize(Roles = "User")]
+    [Route("/Account/User/Order/{id}")]
     public IActionResult OrderDetails(int id)
     {
-        return View();
+        var model = _orderHistoryService.OrderDetailsPage(id);
+        return View(model);
     }
 }

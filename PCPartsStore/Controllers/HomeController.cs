@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PCPartsStore.Entities;
 using PCPartsStore.Models;
 using PCPartsStore.Repository.Interfaces;
+using PCPartsStore.Services.Interfaces;
 
 namespace PCPartsStore.Controllers;
 
@@ -14,14 +15,16 @@ public class HomeController : Controller
     private readonly IProductRepository _productRepository;
     private readonly IProductCategoryRepository _productCategoryRepository;
     private readonly IProductImageRepository _productImageRepository;
+    private readonly ISearchService _searchService;
 
     public HomeController(ILogger<HomeController> logger, IProductRepository productRepository,
-        IProductImageRepository productImageRepository, IProductCategoryRepository productCategoryRepository)
+        IProductImageRepository productImageRepository, IProductCategoryRepository productCategoryRepository, ISearchService searchService)
     {
         _logger = logger;
         _productRepository = productRepository;
         _productImageRepository = productImageRepository;
         _productCategoryRepository = productCategoryRepository;
+        _searchService = searchService;
     }
 
     public async Task<IActionResult> Index()
@@ -53,14 +56,15 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Search(string searchString, int? page)
     {
-        // ViewData["actions"] = await _productCategoryRepository.GetProductCategories();
-        IEnumerable<ProductCategory> productCategories = _productCategoryRepository.GetProductCategories();
-
-        List<string> productCategoriesNames = productCategories.Select(x => x.Name).ToList();
-        
-        ViewData["actions"] = productCategoriesNames;
-        // search
-        
-        return View();
+        ViewData["actions"] = new List<string>() { "Cpu", "Gpu", "Ram", "Motherboard" };
+        var paginatedList = await _searchService.Search(searchString, page);
+        if (page > paginatedList.TotalPages)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return View("../Search/Search", paginatedList);
+        }
     }
 }

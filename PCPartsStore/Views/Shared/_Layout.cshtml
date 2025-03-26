@@ -68,13 +68,18 @@
                                         Products
                                     </a>
                                     <ul class="dropdown-menu sub-menu text-center">
-                                        @foreach (var productCategory in ProductCategoryRepository.GetProductCategories())
-                                        {
-                                            <li>
-                                                @* <a class="nav-link text-dark" asp-action="@productCategory.Name" asp-controller="Product">Cpus</a> *@
-                                                <a class="nav-link text-dark">@productCategory.Name</a>
-                                            </li>
-                                        }
+                                        <li>
+                                            <a class="nav-link text-dark" asp-action="Cpu" asp-controller="Product">CPU</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-dark" asp-action="Gpu" asp-controller="Product">GPU</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-dark" asp-action="Ram" asp-controller="Product">RAM</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link text-dark" asp-action="Motherboard" asp-controller="Product">Motherboards</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </ul>
