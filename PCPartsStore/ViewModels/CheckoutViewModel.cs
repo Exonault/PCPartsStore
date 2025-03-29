@@ -1,7 +1,6 @@
 using PCPartsStore.Entities;
-using PCPartsStore.ViewModels;
 
-namespace AspStore.ViewModels;
+namespace PCPartsStore.ViewModels;
 
 public class CheckoutViewModel
 {

@@ -1,5 +1,5 @@
-﻿using AspStore.ViewModels;
-using PCPartsStore.Paging;
+﻿using PCPartsStore.Paging;
+using PCPartsStore.ViewModels;
 
 namespace PCPartsStore.Services.Interfaces;
 

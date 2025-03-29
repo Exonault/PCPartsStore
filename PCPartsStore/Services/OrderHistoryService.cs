@@ -1,11 +1,11 @@
-﻿using AspStore.ViewModels;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Linq;
 using NuGet.Protocol;
 using PCPartsStore.Data;
 using PCPartsStore.Entities;
 using PCPartsStore.Paging;
 using PCPartsStore.Services.Interfaces;
+using PCPartsStore.ViewModels;
 
 namespace PCPartsStore.Services;
 
@@ -25,7 +25,7 @@ public class OrderHistoryService : IOrderHistoryService
 
     public PaginatedList<OrderHistoryViewModel> OrderPage(int? page)
     {
-         var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
+        var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
         var orders = _dbContext.Orders.Where(i => i.UserId == userId).ToList();
         var orderDetails = orders.Select(i => i.OrderDetails).ToJson();
         var totalPrices = orders.Select(i => i.TotalPrice).ToList();
@@ -38,12 +38,16 @@ public class OrderHistoryService : IOrderHistoryService
         var products = new List<OrderHistoryViewModel>();
         foreach (var item in parsedOuterArray)
         {
+            productName = string.Empty;
             var parsedInnerArray = JArray.Parse(item.ToString());
             foreach (var item2 in parsedInnerArray)
             {
                 if (parsedInnerArray.Count > 1)
+                {
                     productName += _dbContext.Products.FirstOrDefault(p => p.Id == (int)item2["ProductId"]).Name +
                                    " + ";
+                }
+
                 else
                     productName = _dbContext.Products.FirstOrDefault(p => p.Id == (int)item2["ProductId"]).Name;
 
@@ -95,11 +99,11 @@ public class OrderHistoryService : IOrderHistoryService
 
         var model = new OrderHistoryDetailsViewModel
         {
-            DeliveryAddress = order.DeliveryAddress, 
+            DeliveryAddress = order.DeliveryAddress,
             Recipient = order.Recipient,
             PhoneNumber = order.PhoneNumber,
-            OrderDate = order.OrderDate, 
-            Products = products, 
+            OrderDate = order.OrderDate,
+            Products = products,
             ProductQuantities = productQunatities,
             ProductPrices = productPrices
         };

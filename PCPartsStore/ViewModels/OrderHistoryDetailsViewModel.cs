@@ -1,6 +1,6 @@
 using PCPartsStore.Entities;
 
-namespace AspStore.ViewModels;
+namespace PCPartsStore.ViewModels;
 
 public class OrderHistoryDetailsViewModel
 {

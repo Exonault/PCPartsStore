@@ -69,16 +69,20 @@
                                     </a>
                                     <ul class="dropdown-menu sub-menu text-center">
                                         <li>
-                                            <a class="nav-link text-dark" asp-action="Cpu" asp-controller="Product">CPU</a>
+                                            <a class="nav-link text-dark" asp-action="Cpu"
+                                               asp-controller="Product">CPU</a>
                                         </li>
                                         <li>
-                                            <a class="nav-link text-dark" asp-action="Gpu" asp-controller="Product">GPU</a>
+                                            <a class="nav-link text-dark" asp-action="Gpu"
+                                               asp-controller="Product">GPU</a>
                                         </li>
                                         <li>
-                                            <a class="nav-link text-dark" asp-action="Ram" asp-controller="Product">RAM</a>
+                                            <a class="nav-link text-dark" asp-action="Ram"
+                                               asp-controller="Product">RAM</a>
                                         </li>
                                         <li>
-                                            <a class="nav-link text-dark" asp-action="Motherboard" asp-controller="Product">Motherboards</a>
+                                            <a class="nav-link text-dark" asp-action="Motherboard"
+                                               asp-controller="Product">Motherboards</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -137,10 +141,10 @@
                                                    asp-action="UserPage">User</a>
                                             </li>
                                             <li class="nav-item">
-                                                <form method="post"  asp-controller="Account" asp-action="Logout"
+                                                <form method="post" asp-controller="Account" asp-action="Logout"
                                                       class="d-flex justify-content-center">
-                                                    <button type="submit" class="nav-link text-dark btn btn-link">Sign
-                                                        out
+                                                    <button type="submit" class="nav-link text-dark btn btn-link">
+                                                        Sign out
                                                     </button>
                                                 </form>
                                             </li>
@@ -172,10 +176,10 @@
                                             @{
                                                 if (Context.Session.GetComplexData<HashSet<CartViewModel>>("Cart") != null)
                                                 {
-                                                    var productImages = ( ProductImageRepository.GetProductImages()).ToList();
+                                                    var productImages = (ProductImageRepository.GetProductImages()).ToList();
                                                     @foreach (var entity in Context.Session.GetComplexData<HashSet<CartViewModel>>("Cart"))
                                                     {
-                                                        entity.Product.ProductImage = productImages.FirstOrDefault(i => i.Id == entity.Product.ProductImage.Id);
+                                                        entity.Product.ProductImage = productImages.FirstOrDefault(i => i.Id == entity.Product.ProductImageId);
                                                         <div class="cart-item d-flex align-items-center w-100">
                                                             <img src="@entity.Product.ProductImage.ImagePath"
                                                                  width="75px" height="auto">
@@ -194,15 +198,16 @@
                                                                data-initial-price="@entity.InitialPrice">@(entity.InitialPrice * entity.Quantity)</p>
                                                         </div>
                                                     }
-                                            <div class="border-top w-100">
-                                                <div class="mt-2 d-flex gap-1">
-                                                    <a class="btn btn-light border w-50" asp-action="Cart"
-                                                       asp-controller="Cart">Go to cart</a>
-                                                    <a class="btn btn-primary border w-50" asp-action="Checkout"
-                                                       asp-controller="Cart">Checkout</a>
-                                                </div>
-                                            </div>
-                                            }
+
+                                                    <div class="border-top w-100">
+                                                        <div class="mt-2 d-flex gap-1">
+                                                            <a class="btn btn-light border w-50" asp-action="Cart"
+                                                               asp-controller="Cart">Go to cart</a>
+                                                            <a class="btn btn-primary border w-50" asp-action="Checkout"
+                                                               asp-controller="Cart">Checkout</a>
+                                                        </div>
+                                                    </div>
+                                                }
                                             }
                                         </div>
                                     </ul>

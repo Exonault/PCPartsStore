@@ -96,7 +96,8 @@ public class ProductService : IProductService
                     Description = model.Description,
                     Price = model.Price,
                     ProductImageId = entity.ProductImageId,
-                    ProductCategoryId = model.ProductCategoryId
+                    ProductCategoryId = model.ProductCategoryId,
+                    Quantity = model.Quantity,
                 };
                 var oldImageName = _dbContext.ProductsImages.FirstOrDefault(i => i.Id == entity.ProductImageId).Name;
                 if (await UploadImage(image, entity.ProductImageId) == false) 
@@ -119,7 +120,8 @@ public class ProductService : IProductService
                     Description = model.Description,
                     Price = model.Price,
                     ProductImageId = entity.ProductImageId,
-                    ProductCategoryId = model.ProductCategoryId
+                    ProductCategoryId = model.ProductCategoryId,
+                    Quantity = model.Quantity,
                 };
                 _dbContext.Products.Remove(entity);
                 await _dbContext.SaveChangesAsync();

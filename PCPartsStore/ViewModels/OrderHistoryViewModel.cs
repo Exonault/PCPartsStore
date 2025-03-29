@@ -1,4 +1,4 @@
-namespace AspStore.ViewModels;
+namespace PCPartsStore.ViewModels;
 
 public class OrderHistoryViewModel
 {

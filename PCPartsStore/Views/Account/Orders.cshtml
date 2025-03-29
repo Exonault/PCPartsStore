@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model PCPartsStore.Paging.PaginatedList<AspStore.ViewModels.OrderHistoryViewModel>
+@model PCPartsStore.Paging.PaginatedList<PCPartsStore.ViewModels.OrderHistoryViewModel>
 @{
     ViewData["Title"] = "Orders";
 }
@@ -23,7 +23,10 @@
                     {
                         <tr>
                             <td colspan="2">
-                                <a asp-action="OrderDetails" asp-route-id="@product.OrderId" class="link-primary link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-offset-1-hover">@product.Name</a>
+                                <a asp-action="OrderDetails" asp-route-id="@product.OrderId"
+                                   class="link-primary link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-offset-1-hover">
+                                    @product.Name
+                                </a>
                             </td>
                             <td>@product.OrderDate</td>
                             <td class="text-end">@product.TotalPrice</td>

@@ -317,7 +317,8 @@ public class ProductController : Controller
             Name = data["Name"],
             Description = data["Description"],
             Price = Convert.ToDecimal(data["Price"]),
-            ProductCategoryId = Convert.ToInt32(data["ProductCategoryId"])
+            ProductCategoryId = Convert.ToInt32(data["ProductCategoryId"]),
+            Quantity = Convert.ToInt32(data["Quantity"]),
         };
         //keep the existing image if the user hasn't uploaded a new one
         if (image == null)
