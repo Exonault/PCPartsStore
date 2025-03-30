@@ -65,6 +65,11 @@ public class ApplicationDbContext : IdentityDbContext
             {
                 Id = 4,
                 Name = "Motherboard"
+            },
+            new ProductCategory
+            {
+                Id = 5,
+                Name = "Other"
             });
     }
 }

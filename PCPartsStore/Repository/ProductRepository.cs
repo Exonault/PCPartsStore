@@ -32,7 +32,10 @@ public class ProductRepository : IProductRepository
 
     public List<Product> GetLatestProducts(int count)
     {
-        return _dbContext.Products.OrderByDescending(p => p.Price).Take(count).ToList();
+        return _dbContext.Products
+            .OrderByDescending(p => p.Id)
+            .Take(count)
+            .ToList();
     }
 
     public List<Product> GetProductsByCategory(int categoryId)

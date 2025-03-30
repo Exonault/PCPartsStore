@@ -113,6 +113,14 @@ public class ProductController : Controller
             ViewData["ProductCategories"] = new SelectList(productsCategory, "Id", "Name");
             return View();
         }
+        
+        else if (product == "Other")
+        {
+            ViewData["AddText"] = "Add a new product";
+            var productsCategory = _dbContext.ProductsCategory.Where(p => p.Id == 5).ToList();
+            ViewData["ProductCategories"] = new SelectList(productsCategory, "Id", "Name");
+            return View();
+        }
 
         else
         {
@@ -164,6 +172,10 @@ public class ProductController : Controller
                     else if (model.ProductCategoryId == 4)
                     {
                         return RedirectToAction("Motherboard");
+                    }
+                    else if (model.ProductCategoryId == 5)
+                    {
+                        return RedirectToAction("Other");
                     }
                     else
                     {
@@ -295,6 +307,37 @@ public class ProductController : Controller
             return NotFound();
         }
     }
+    
+    
+    public IActionResult Other(int? page)
+    {
+        var products = _productService.GetProductsByCategory(5);
+        var paginatedList = PaginatedList<Product>.Create(products, page ?? 1, 8);
+        if (page > paginatedList.TotalPages)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return View(paginatedList);
+        }
+    }
+
+    [Route("/Product/Other/{id}")]
+    public IActionResult Other(int id)
+    {
+        var product = _dbContext.Products.FirstOrDefault(p => p.Id == id && p.ProductCategoryId == 5);
+        if (product != null)
+        {
+            product.ProductImage =
+                _dbContext.ProductsImages.Where(i => i.Id == product.ProductImageId).FirstOrDefault();
+            return View("Product", product);
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
 
     [Route("/Product/Edit/{id}")]
     [Authorize(Roles = "Admin")]
@@ -377,6 +420,10 @@ public class ProductController : Controller
             {
                 return Json(Url.Action("Motherboard"));
             }
+            else if (model.ProductCategoryId == 5)
+            {
+                return Json(Url.Action("Other"));
+            }
         }
 
         return View(model);
@@ -406,6 +453,10 @@ public class ProductController : Controller
             else if (productCategoryId == 4)
             {
                 return Json(Url.Action("Motherboard"));
+            }
+            else if (productCategoryId == 5)
+            {
+                return Json(Url.Action("Other"));
             }
         }
 

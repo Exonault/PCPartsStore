@@ -29,9 +29,9 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var latestProducts = (_productRepository.GetLatestProducts(5)).ToList();
+        var latestProducts = _productRepository.GetLatestProducts(5).ToList();
 
-        ViewData["actions"] = (_productCategoryRepository.GetProductCategories())
+        ViewData["actions"] = _productCategoryRepository.GetProductCategories()
             .Select(pc => pc.Name)
             .ToList();
 
@@ -56,7 +56,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Search(string searchString, int? page)
     {
-        ViewData["actions"] = new List<string>() { "Cpu", "Gpu", "Ram", "Motherboard" };
+        ViewData["actions"] = new List<string>() { "Cpu", "Gpu", "Ram", "Motherboard", "Other" };
         var paginatedList = await _searchService.Search(searchString, page);
         if (page > paginatedList.TotalPages)
         {
