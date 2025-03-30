@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using PCPartsStore.Entities
 @using PCPartsStore.Extensions
 @using PCPartsStore.Repository.Interfaces
 @using PCPartsStore.ViewModels
@@ -63,6 +64,19 @@
                             </button>
                             <ul class="dropdown-menu main-menu">
                                 <div class="btn-group dropend">
+                                    @* <a class="nav-link text-dark dropdown-toggle" asp-action="Index" *@
+                                    @*    asp-controller="Product"> *@
+                                    @*     Products *@
+                                    @* </a> *@
+                                    @* <ul class="dropdown-menu sub-menu text-center"> *@
+                                    @*     @foreach (ProductCategory category in ProductCategoryRepository.GetProductCategories()) *@
+                                    @*     { *@
+                                    @*         <li> *@
+                                    @*             <a class="nav-link text dark" asp-action="Products" asp-route-productCategory="@category.Name" *@
+                                    @*                asp-controller="Product">@category.Name</a> *@
+                                    @*         </li> *@
+                                    @*     } *@
+                                    @* </ul> *@
                                     <a class="nav-link text-dark dropdown-toggle" asp-action="Index"
                                        asp-controller="Product">
                                         Products

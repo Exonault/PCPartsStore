@@ -36,9 +36,28 @@ public class ProductController : Controller
 
 
     [Route("Product/Products/{productCategory}")]
-    public IActionResult Products(string productCategory)
+    public IActionResult Products(string productCategory, int? page)
     {
-        Console.WriteLine("ProductCategory: " + productCategory);
+
+        ProductCategory? category = _dbContext.ProductsCategory.FirstOrDefault(p => p.Name == productCategory);
+
+        if (category == null)
+        {
+            return NotFound();
+        }
+        
+        var products = _productService.GetProductsByCategory(category.Id);
+        var paginatedList = PaginatedList<Product>.Create(products, page ?? 1, 8);
+        
+        if (page > paginatedList.TotalPages)
+        {
+            return NotFound();
+        }
+        else
+        {
+            ViewData["ProductCategory"] = productCategory;
+            return View(paginatedList);
+        }
 
         return View();
     }
