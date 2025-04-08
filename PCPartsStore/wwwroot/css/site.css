@@ -243,7 +243,7 @@ header, .container {
   position: relative;
 }
 
-.bi-plus-circle, .bi-cpu, .bi-gpu-card, .bi-memory, .bi-motherboard {
+.bi-plus-circle, .bi-cpu, .bi-gpu-card, .bi-memory, .bi-motherboard, .bi-collection{
   font-size: 5em;
 }
 
