@@ -19,4 +19,5 @@ PCPartsStore is a straightforward e-commerce app for computer components. It let
 2. Open the project inside your IDE.
 3. In the `appsettings.json` in the field `ApplicationDb` add your database connection string.
 4. In the terminal execute `dotnet restore` to install any missing dependencies.
-5. Press run.
+5. Apply migrations: In the terminal execute `dotnet ef update database`. 
+6. Press run.
