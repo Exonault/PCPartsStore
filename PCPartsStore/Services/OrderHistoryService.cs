@@ -42,16 +42,27 @@ public class OrderHistoryService : IOrderHistoryService
             var parsedInnerArray = JArray.Parse(item.ToString());
             foreach (var item2 in parsedInnerArray)
             {
+                int id = (int)item2["ProductId"]!;
                 if (parsedInnerArray.Count > 1)
                 {
-                    productName += _dbContext.Products.FirstOrDefault(p => p.Id == (int)item2["ProductId"]).Name +
-                                   " + ";
+                    Product? product = _dbContext.Products.FirstOrDefault(p => p.Id == id);
+                    if (product == null)
+                    {
+                        continue;
+                    }
+                    productName += product!.Name + " + ";
                 }
-
                 else
-                    productName = _dbContext.Products.FirstOrDefault(p => p.Id == (int)item2["ProductId"]).Name;
-
-                productId = (int)item2["ProductId"];
+                {
+                    Product? product = _dbContext.Products.FirstOrDefault(p => p.Id == id);
+                    if (product == null)
+                    {
+                        continue;
+                    }
+                    productName += product!.Name;
+                }
+                
+                productId = id;
             }
 
             if (parsedInnerArray.Count > 1)

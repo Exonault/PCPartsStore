@@ -34,6 +34,12 @@ public class ProductController : Controller
         return View();
     }
 
+    [Route("Product/ProductCategories")]
+    public IActionResult ProductCategories()
+    {
+        return View();
+    }
+
 
     [Route("Product/Products/{productCategory}")]
     public IActionResult Products(string productCategory, int? page)
