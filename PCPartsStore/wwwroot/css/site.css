@@ -377,3 +377,25 @@ header, .container {
 .sub-menu {
   transform: translateX(100%) translateY(-5%);
 }
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-family: sans-serif;
+}
+.feature {
+  flex: 1;
+  padding: 10px;
+}
+.feature i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: block;
+}
+.feature-text {
+  font-size: 14px;
+  font-weight: bold;
+}
