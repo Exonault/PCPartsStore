@@ -3,13 +3,6 @@
     ViewData["Title"] = "Product";
 }
 
-@*<h1>Product</h1>
-<h1>ID - @Model.Id</h1>
-<h1>Name - @Model.Name</h1>
-<h1 class="d-flex">Description - <span class="ms-2">@Html.Raw(Model.Description)</span></h1>
-<h1>Price - @Model.Price</h1>
-<h1>ImagePath - @Model.ProductImage.ImagePath</h1>
-<h1>Category Id - @Model.ProductCategoryId</h1>*@
 <div class="row">
     <div class="col-lg-4 col-sm-auto d-flex flex-column">
         <span class="fs-1 col-lg-auto col-sm-4">@Model.Name</span>
@@ -17,7 +10,7 @@
              style="object-fit: contain"/>
     </div>
     <div class="col-lg-4 col-sm-12" style="margin-top: 4.5em !important;">
-        <span class="fs-4 col-lg-auto col-sm-4">Short Description</span>
+        <span class="fs-4 col-lg-auto col-sm-4">Description</span>
         <span>@Html.Raw(Model.Description)</span>
     </div>
     <div class="col-lg-4 col-sm-auto d-flex flex-column border rounded p-0" style="margin-top: 4.5em !important;">
